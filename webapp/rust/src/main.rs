@@ -1,9 +1,3 @@
-//! Run with
-//!
-//! ```not_rust
-//! cargo run -p example-readme
-//! ```
-
 use axum::{
     http::StatusCode,
     response::IntoResponse,
