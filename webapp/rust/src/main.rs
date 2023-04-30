@@ -22,11 +22,12 @@ async fn main() {
     let password = env::var("ISUCONP_DB_PASSWORD").unwrap_or_else(|_| "".to_string());
     let dbname = env::var("ISUCONP_DB_NAME").unwrap_or_else(|_| "isuconp".to_string());
     let dsn = format!(
-        "{}:{}@tcp({}:{})/{}?charset=utf8mb4&parseTime=true&loc=Local",
+        "mysql://{}:{}@{}:{}/{}?charset=utf8mb4&parseTime=true&loc=Local",
         user, password, host, port, dbname
     );
 
     // connect to mysql
+    println!("dsn: {}", dsn);
     let pool = sqlx::MySqlPool::connect(&dsn).await.unwrap();
 
     // build our application with a route
@@ -37,9 +38,7 @@ async fn main() {
         .route("/users", post(create_user));
 
     // run our app with hyper
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     tracing::debug!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }

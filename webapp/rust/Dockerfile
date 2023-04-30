@@ -4,6 +4,6 @@ RUN mkdir -p /home/webapp
 WORKDIR /home/webapp
 COPY . /home/webapp
 
-RUN cargo build --release
+# RUN cargo build --release
 
-CMD ./target/release/rust
+CMD ./target/x86_64-unknown-linux-gnu/release/rust
