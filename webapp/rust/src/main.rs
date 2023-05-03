@@ -38,14 +38,14 @@ async fn main() {
         .route("/users", post(create_user));
 
     // run our app with hyper
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
     tracing::debug!("listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }
 
 // basic handler that responds with a static string
 async fn root() -> &'static str {
-    "Hello, World!"
+    "Hello, World! changed"
 }
 
 async fn create_user(

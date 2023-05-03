@@ -10,8 +10,7 @@ services:
       - app
 
   app:
-    # Go実装の場合は golang/ PHP実装の場合は php/
-    build: rust/
+    image: gcr.io/distroless/base-debian11
     environment:
       ISUCONP_DB_HOST: mysql
       ISUCONP_DB_PORT: 3306
@@ -24,6 +23,8 @@ services:
       - memcached
     volumes:
       - ./public:/home/public
+      - ./rust/target/x86_64-unknown-linux-gnu/release/rust:/home/webapp/rust
+    command: ["/home/webapp/rust"]
     init: true
     depends_on:
       mysql:
