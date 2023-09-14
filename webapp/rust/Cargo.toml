@@ -16,7 +16,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 sqlx = { git = "https://github.com/launchbadge/sqlx.git", features = [ "runtime-tokio", "mysql", "chrono" ] }
 regex = "1.8.1"
 once_cell = "1.17.1"
-memcache = "0.17.0"
+memcache = { version = "0.17.0", default-features = false}
 bincode = "1.3.3"
 chrono = { version = "0.4.24", features = ["serde"] }
 derive_more = "0.99.17"
